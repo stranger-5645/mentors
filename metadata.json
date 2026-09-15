@@ -1,0 +1,6 @@
+{
+  "name": "Trading Journal for Mentors",
+  "description": "Automated trading journaling software designed for trading mentors to monitor student performance, strengthen 1-on-1 mentorship, and connect via WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

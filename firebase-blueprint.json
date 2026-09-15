@@ -1,0 +1,24 @@
+{
+  "entities": {
+    "inquiry": {
+      "title": "Mentor Inquiry",
+      "description": "Inquiries submitted by trading mentors requesting software demo, syllabus integration, or onboarding.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the mentor or academy" },
+        "whatsappNumber": { "type": "string", "description": "WhatsApp contact number" },
+        "email": { "type": "string", "format": "email", "description": "Email address" },
+        "studentCount": { "type": "string", "description": "Approximate number of students" },
+        "notes": { "type": "string", "description": "Additional requirements or notes" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Submission timestamp" }
+      },
+      "required": ["whatsappNumber", "createdAt"]
+    }
+  },
+  "firestore": {
+    "inquiries": {
+      "entity": "inquiry",
+      "description": "Collection of mentor inquiries and demo requests"
+    }
+  }
+}

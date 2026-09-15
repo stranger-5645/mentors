@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /inquiries/{inquiryId} {
+      // Allow public inquiry creation and read for dashboard/mentor leads
+      allow read: if true;
+      allow create: if request.resource.data.whatsappNumber is string;
+      allow update, delete: if false;
+    }
+  }
+}
