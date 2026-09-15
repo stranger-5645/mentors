@@ -9,23 +9,28 @@ import PageMentorLanding from './components/PageMentorLanding';
 import PageSoftwareFeatures from './components/PageSoftwareFeatures';
 import Footer from './components/Footer';
 import AtmosphericBackground from './components/AtmosphericBackground';
-import { MessageCircle, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
+import { WhatsAppIcon } from './components/SocialIcons';
 import { logMentorInquiry } from './lib/firebase';
-import MentorInquiryModal from './components/MentorInquiryModal';
+
+export const DEFAULT_CONTACT_MESSAGE =
+  "Hello, I would like to learn more about the automated journaling software. Let's connect.";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'mentor' | 'features'>('mentor');
   const [toastData, setToastData] = useState<{ message: string; url: string } | null>(null);
-  const [isInquiryModalOpen, setIsInquiryModalOpen] = useState(false);
 
   // Configure your WhatsApp number here or via the VITE_WHATSAPP_NUMBER environment variable
   const rawNumber = (import.meta.env.VITE_WHATSAPP_NUMBER as string) || '15550192834';
   const cleanNumber = rawNumber.replace(/[^0-9]/g, '');
 
+  // Configure Telegram username or fallback to default
+  const envTelegram = (import.meta.env.VITE_TELEGRAM_USERNAME as string) || 'YOUR_USERNAME';
+  const cleanTelegram = envTelegram.replace(/^@/, '');
+  const telegramUrl = `https://t.me/${cleanTelegram}?text=${encodeURIComponent(DEFAULT_CONTACT_MESSAGE)}`;
+
   const handleWhatsAppClick = (customText?: string) => {
-    const defaultText =
-      "Hello! I am a trading mentor and I'd like to learn more about the automated trading journaling software for my students.";
-    const textToSend = customText || defaultText;
+    const textToSend = customText || DEFAULT_CONTACT_MESSAGE;
     const encoded = encodeURIComponent(textToSend);
     const waUrl = `https://wa.me/${cleanNumber}?text=${encoded}`;
 
@@ -71,7 +76,7 @@ export default function App() {
           rel="noopener noreferrer"
           className="fixed top-20 right-4 sm:right-6 z-50 bg-white hover:bg-zinc-50 text-zinc-900 px-4 py-2.5 rounded-xl font-semibold text-xs shadow-lg flex items-center gap-2.5 border border-[#ded8cb] transition-all cursor-pointer animate-in fade-in slide-in-from-top-3 group"
         >
-          <MessageCircle className="w-4 h-4 text-[#25D366] fill-[#25D366] shrink-0" />
+          <WhatsAppIcon className="w-4 h-4 shrink-0" />
           <span>{toastData.message}</span>
           <span className="text-purple-700 underline text-[11px] font-bold group-hover:text-purple-800">
             Open Chat
@@ -93,7 +98,7 @@ export default function App() {
           <PageMentorLanding
             onWhatsAppClick={handleWhatsAppClick}
             onNavigateToFeatures={() => handleNavigate('features')}
-            onOpenInquiryModal={() => setIsInquiryModalOpen(true)}
+            telegramUrl={telegramUrl}
           />
         ) : (
           <PageSoftwareFeatures
@@ -102,13 +107,6 @@ export default function App() {
           />
         )}
       </main>
-
-      {/* Firebase Firestore Lead Capture Modal */}
-      <MentorInquiryModal
-        isOpen={isInquiryModalOpen}
-        onClose={() => setIsInquiryModalOpen(false)}
-        onWhatsAppRedirect={handleWhatsAppClick}
-      />
 
       {/* Clean Minimal Paper Footer */}
       <Footer onNavigate={handleNavigate} />

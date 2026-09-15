@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import {
-  MessageCircle,
   ArrowRight,
   Sparkles,
   RefreshCw,
@@ -25,17 +24,18 @@ import {
 } from 'lucide-react';
 import HeroVisualComposition from './HeroVisualComposition';
 import FlowPathSection from './FlowPathSection';
+import { WhatsAppIcon, TelegramIcon } from './SocialIcons';
 
 interface PageMentorLandingProps {
   onWhatsAppClick: (customText?: string) => void;
   onNavigateToFeatures: () => void;
-  onOpenInquiryModal?: () => void;
+  telegramUrl?: string;
 }
 
 export default function PageMentorLanding({
   onWhatsAppClick,
   onNavigateToFeatures,
-  onOpenInquiryModal,
+  telegramUrl = "https://t.me/YOUR_USERNAME?text=Hello%2C%20I%20would%20like%20to%20learn%20more%20about%20the%20automated%20journaling%20software.%20Let%27s%20connect.",
 }: PageMentorLandingProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -175,33 +175,33 @@ export default function PageMentorLanding({
               Give your students a complete trading system — beyond strategies and charts.
             </p>
 
-            {/* Primary CTA + Secondary Demo Request */}
+            {/* Contact Actions: WhatsApp & Telegram */}
             <div className="flex flex-wrap items-center gap-3.5">
               <button
                 id="hero-whatsapp-btn"
                 onClick={() =>
                   onWhatsAppClick(
-                    'Hello! I am a trading mentor interested in the automated journaling system for my students. Let’s connect on WhatsApp.'
+                    "Hello, I would like to learn more about the automated journaling software. Let's connect."
                   )
                 }
                 className="inline-flex items-center gap-2.5 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-950 text-white font-bold px-7 py-3.5 rounded-full text-sm sm:text-base shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer border border-zinc-900 group"
               >
-                <MessageCircle className="w-5 h-5 text-[#25D366] fill-[#25D366]" />
+                <WhatsAppIcon className="w-5 h-5 shrink-0" />
                 <span>Connect on WhatsApp</span>
                 <ArrowRight className="w-4 h-4 ml-0.5 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
-              {onOpenInquiryModal && (
-                <button
-                  onClick={onOpenInquiryModal}
-                  className="inline-flex items-center gap-2 bg-white hover:bg-zinc-50 active:bg-zinc-100 text-zinc-800 font-bold px-6 py-3.5 rounded-full text-sm sm:text-base shadow-xs border border-[#ded8cb] hover:border-zinc-400 transition-all cursor-pointer"
-                >
-                  <span>Book Demo</span>
-                  <span className="text-[10px] font-mono font-bold text-purple-700 bg-purple-50 border border-purple-200 px-2 py-0.5 rounded-full">
-                    FREE
-                  </span>
-                </button>
-              )}
+              <a
+                id="hero-telegram-btn"
+                href={telegramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 bg-white hover:bg-zinc-50 active:bg-zinc-100 text-zinc-900 font-bold px-7 py-3.5 rounded-full text-sm sm:text-base shadow-xs border border-[#ded8cb] hover:border-zinc-400 transition-all transform hover:-translate-y-0.5 cursor-pointer group"
+              >
+                <TelegramIcon className="w-5 h-5 shrink-0" />
+                <span>Connect on Telegram</span>
+                <ArrowRight className="w-4 h-4 ml-0.5 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
+              </a>
             </div>
           </div>
 
@@ -542,27 +542,27 @@ export default function PageMentorLanding({
                 id="final-whatsapp-btn"
                 onClick={() =>
                   onWhatsAppClick(
-                    'Hello! I want to give my mentorship a system with the automated journaling software. Let’s talk.'
+                    "Hello, I would like to learn more about the automated journaling software. Let's connect."
                   )
                 }
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-950 text-white font-bold px-8 py-4 rounded-full text-base shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer border border-zinc-900 group"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-950 text-white font-bold px-8 py-4 rounded-full text-base shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer border border-zinc-900 group"
               >
-                <MessageCircle className="w-5 h-5 text-[#25D366] fill-[#25D366]" />
+                <WhatsAppIcon className="w-5 h-5 shrink-0" />
                 <span>Connect on WhatsApp</span>
                 <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
               </button>
 
-              {onOpenInquiryModal && (
-                <button
-                  onClick={onOpenInquiryModal}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-zinc-50 active:bg-zinc-100 text-zinc-800 font-bold px-7 py-4 rounded-full text-base shadow-xs border border-[#ded8cb] hover:border-zinc-400 transition-all cursor-pointer"
-                >
-                  <span>Book Demo</span>
-                  <span className="text-[10px] font-mono font-bold text-purple-700 bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-full">
-                    FREE
-                  </span>
-                </button>
-              )}
+              <a
+                id="final-telegram-btn"
+                href={telegramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-white hover:bg-zinc-50 active:bg-zinc-100 text-zinc-900 font-bold px-8 py-4 rounded-full text-base shadow-xs border border-[#ded8cb] hover:border-zinc-400 transition-all transform hover:-translate-y-0.5 cursor-pointer group"
+              >
+                <TelegramIcon className="w-5 h-5 shrink-0" />
+                <span>Connect on Telegram</span>
+                <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
+              </a>
             </div>
           </div>
         </div>

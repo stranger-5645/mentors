@@ -5,10 +5,10 @@ import {
   CalendarDays,
   BarChart2,
   PlayCircle,
-  MessageCircle,
   ArrowLeft,
   ArrowRight,
 } from 'lucide-react';
+import { WhatsAppIcon } from './SocialIcons';
 
 interface PageSoftwareFeaturesProps {
   onWhatsAppClick: (customText?: string) => void;
@@ -142,12 +142,12 @@ export default function PageSoftwareFeatures({
               <button
                 onClick={() =>
                   onWhatsAppClick(
-                    'Hello! I reviewed the software features and would like to see how to implement this for my trading students.'
+                    "Hello, I would like to learn more about the automated journaling software. Let's connect."
                   )
                 }
                 className="inline-flex items-center gap-3 bg-zinc-900 hover:bg-zinc-800 active:bg-zinc-950 text-white font-bold px-8 py-4 rounded-full text-base shadow-sm transition-all transform hover:-translate-y-0.5 cursor-pointer border border-zinc-900 group"
               >
-                <MessageCircle className="w-5 h-5 text-[#25D366] fill-[#25D366]" />
+                <WhatsAppIcon className="w-5 h-5 shrink-0" />
                 <span>Connect on WhatsApp</span>
                 <ArrowRight className="w-4 h-4 text-zinc-400 group-hover:translate-x-0.5 transition-transform" />
               </button>
